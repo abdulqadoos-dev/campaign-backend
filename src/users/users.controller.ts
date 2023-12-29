@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { Public } from 'src/auth/constants';
 import { User } from 'src/entities/user.entity';
 
-@Public()
+// @Public()
 @Controller('users')
 export class UsersController {
 

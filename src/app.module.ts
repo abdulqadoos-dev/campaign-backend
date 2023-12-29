@@ -5,7 +5,6 @@ import { EmailsModule } from './emails/emails.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 import { User } from './entities/user.entity';
 
 @Module({
@@ -26,8 +25,4 @@ import { User } from './entities/user.entity';
 })
 
 
-export class AppModule {
-
-  constructor(private dataSource: DataSource) { }
-
-}
+export class AppModule { }
