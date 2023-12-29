@@ -11,9 +11,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   login(@Body() user) {
-
     return this.authService.autenticate(user.username, user.password);
-
   }
 
 }
