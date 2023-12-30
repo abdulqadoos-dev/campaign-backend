@@ -5,9 +5,13 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { DataSource } from 'typeorm';
+
+import { CampaignsModule } from './campaigns/campaigns.module';
+import { Campaign } from './campaigns/entities/campaign.entity';
 
 @Module({
-  imports: [AuthModule, UsersModule,
+  imports: [AuthModule, UsersModule, CampaignsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
@@ -15,7 +19,7 @@ import { User } from './entities/user.entity';
       username: 'root',
       password: '',
       database: 'email',
-      entities: [User],
+      entities: [User, Campaign],
       synchronize: true,
     }),
   ],
@@ -24,4 +28,6 @@ import { User } from './entities/user.entity';
 })
 
 
-export class AppModule { }
+export class AppModule { 
+  constructor(private dataSource: DataSource) {}
+}
