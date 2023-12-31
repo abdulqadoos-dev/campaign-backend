@@ -1,22 +1,30 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Campaign } from 'src/campaigns/entities/campaign.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 50 })
+  @Column()
+  name: string;
+  
+  @Column()
   username: string;
 
-  @Column({ length: 100 })
+  @Column()
   email: string;
 
   @Column()
   password: string;
 
-  // You can add more fields as needed for your user entity
+  @Column()
+  role: string;
 
-  // Example of adding a created_at timestamp
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  createdAt: Date;
+
+  @OneToMany(() => Campaign, (campaign) => campaign.user)
+  campaigns: Campaign[]
+  
 }
