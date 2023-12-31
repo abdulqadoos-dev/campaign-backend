@@ -9,9 +9,11 @@ import { DataSource } from 'typeorm';
 
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { Campaign } from './campaigns/entities/campaign.entity';
+import { LeadsModule } from './leads/leads.module';
+import { Lead } from './leads/entities/lead.entity';
 
 @Module({
-  imports: [AuthModule, UsersModule, CampaignsModule,
+  imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
@@ -19,9 +21,10 @@ import { Campaign } from './campaigns/entities/campaign.entity';
       username: 'root',
       password: '',
       database: 'email',
-      entities: [User, Campaign],
+      entities: [User, Campaign, Lead],
       synchronize: true,
     }),
+    AuthModule, UsersModule, CampaignsModule, LeadsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
