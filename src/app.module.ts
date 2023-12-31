@@ -25,7 +25,7 @@ import { CampaignsModule } from './campaigns/campaigns.module';
       password: '',
       database: 'campaigns',
       entities: [User, Campaign, Lead],
-      synchronize: false,
+      synchronize: true,
     }),
     AuthModule, UsersModule, CampaignsModule, LeadsModule,
   ],

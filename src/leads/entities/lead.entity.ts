@@ -34,7 +34,7 @@ export class Lead {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ManyToOne(() => Campaign, (campaign) => campaign.lead)
+  @ManyToOne(() => Campaign, (campaign) => campaign.leads)
   campaign: Campaign
 
 }

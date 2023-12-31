@@ -25,6 +25,6 @@ export class User {
   createdAt: Date;
 
   @OneToMany(() => Campaign, (campaign) => campaign.user)
-  campaign: Campaign[]
+  campaigns: Campaign[]
   
 }

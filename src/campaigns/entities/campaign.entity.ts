@@ -23,10 +23,10 @@ export class Campaign {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.campaign)
+  @ManyToOne(() => User, (user) => user.campaigns)
   user: User
 
   @OneToMany(() => Lead, (lead) => lead.campaign)
-  lead: Lead[]
+  leads: Lead[]
 
 }
