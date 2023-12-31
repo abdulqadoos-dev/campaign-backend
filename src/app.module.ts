@@ -1,16 +1,19 @@
+import { DataSource } from 'typeorm';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppService } from './app.service';
+import { AppController } from './app.controller';
+
+import { User } from './entities/user.entity';
+import { Lead } from './leads/entities/lead.entity';
+import { Campaign } from './campaigns/entities/campaign.entity';
+
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { DataSource } from 'typeorm';
-
-import { CampaignsModule } from './campaigns/campaigns.module';
-import { Campaign } from './campaigns/entities/campaign.entity';
 import { LeadsModule } from './leads/leads.module';
-import { Lead } from './leads/entities/lead.entity';
+import { CampaignsModule } from './campaigns/campaigns.module';
+
 
 @Module({
   imports: [
@@ -20,9 +23,9 @@ import { Lead } from './leads/entities/lead.entity';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'email',
+      database: 'campaigns',
       entities: [User, Campaign, Lead],
-      synchronize: true,
+      synchronize: false,
     }),
     AuthModule, UsersModule, CampaignsModule, LeadsModule,
   ],

@@ -6,19 +6,25 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 50 })
+  @Column()
+  name: string;
+  
+  @Column()
   username: string;
 
-  @Column({ length: 100 })
+  @Column()
   email: string;
 
   @Column()
   password: string;
 
+  @Column()
+  role: string;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  createdAt: Date;
 
   @OneToMany(() => Campaign, (campaign) => campaign.user)
-  campaigns: Campaign[];
+  campaign: Campaign[]
   
 }

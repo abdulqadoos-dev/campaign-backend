@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Campaign } from "src/campaigns/entities/campaign.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'leads' })
 export class Lead {
@@ -7,10 +8,10 @@ export class Lead {
   id: number;
 
   @Column()
-  first_name: string;
+  firstName: string;
 
   @Column()
-  last_name: string;
+  lastName: string;
 
   @Column()
   email: string;
@@ -28,6 +29,12 @@ export class Lead {
   notes: string;
 
   @Column()
-  company_url: string;
+  companyUrl: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @ManyToOne(() => Campaign, (campaign) => campaign.lead)
+  campaign: Campaign
 
 }
