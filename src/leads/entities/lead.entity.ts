@@ -10,26 +10,23 @@ export class Lead {
   @Column()
   firstName: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
-  @Column()
+  @Column({ nullable: true })
+  designation: string;
+
+  @Column({ nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   url: string;
 
-  @Column()
-  company: string;
-
-  @Column()
+  @Column({ default: "new" })
   status: string;
 
-  @Column()
+  @Column({ nullable: true })
   notes: string;
-
-  @Column()
-  companyUrl: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

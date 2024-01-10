@@ -5,7 +5,7 @@ import { UpdateLeadDto } from './dto/update-lead.dto';
 
 @Controller('leads')
 export class LeadsController {
-  constructor(private readonly leadsService: LeadsService) {}
+  constructor(private readonly leadsService: LeadsService) { }
 
   @Post()
   create(@Body() createLeadDto: CreateLeadDto) {
@@ -32,5 +32,5 @@ export class LeadsController {
     return this.leadsService.remove(+id);
   }
 
-  
+
 }

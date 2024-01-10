@@ -7,14 +7,17 @@ import { jwtConstants } from './constants';
 import { AuthGuard } from './auth.guard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
   imports: [
+    ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '120m' },
+      signOptions: { expiresIn: `${process.env.JWT_EXPIRED_IN}s` },
     }),
   ],
   providers: [AuthService, 

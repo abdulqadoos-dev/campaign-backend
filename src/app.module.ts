@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
@@ -17,6 +18,8 @@ import { CampaignsModule } from './campaigns/campaigns.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({isGlobal: true}),
+
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
@@ -27,6 +30,7 @@ import { CampaignsModule } from './campaigns/campaigns.module';
       entities: [User, Campaign, Lead],
       synchronize: true,
     }),
+    
     AuthModule, UsersModule, CampaignsModule, LeadsModule,
   ],
   controllers: [AppController],

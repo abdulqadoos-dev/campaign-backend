@@ -5,6 +5,7 @@ import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
+
 @Injectable()
 export class AuthService {
 
@@ -16,9 +17,13 @@ export class AuthService {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new UnauthorizedException();
-    
-    let { name, email, role, } = user;
-    return { name, email, role, accessToken: await this.jwtService.signAsync({ sub: user.id, username: user.username }) };
+
+    let { name, email, role } = user;
+    return { name, email, role,
+      createdAt: new Date(),
+      expiredAt: new Date(new Date().getTime() + (+process.env.JWT_EXPIRED_IN * 1000)), 
+      accessToken: await this.jwtService.signAsync({ sub: user.id, username: user.username }) 
+    };
   }
 
 
