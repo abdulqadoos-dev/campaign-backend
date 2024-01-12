@@ -15,7 +15,11 @@ export class LeadsService {
   }
 
   findAll() {
-    return this.leadsRepository.find();
+    return this.leadsRepository.find({
+      order: {
+        id: "DESC",
+      },
+    });
   }
 
   findOne(id: number) {
