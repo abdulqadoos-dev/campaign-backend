@@ -38,6 +38,7 @@ export class LeadsService {
           { lastName: Like(`%${filters.query}%`) },
           { designation: Like(`%${filters.query}%`) },
           { email: Like(`%${filters.query}%`) },
+          { notes: Like(`%${filters.query}%`) },
         ]
       }
       delete newFilters['query'];
@@ -50,6 +51,7 @@ export class LeadsService {
           { lastName: Like(`%${filters.query}%`), status: filters.status },
           { designation: Like(`%${filters.query}%`), status: filters.status },
           { email: Like(`%${filters.query}%`), status: filters.status },
+          { notes: Like(`%${filters.query}%`), status: filters.status },
         ]
       }
       delete newFilters['query'];
