@@ -5,6 +5,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Lead } from './entities/lead.entity';
 import { Repository } from 'typeorm';
 
+import { Like } from "typeorm"
+
+
 @Injectable()
 export class LeadsService {
 
@@ -19,7 +22,43 @@ export class LeadsService {
       order: {
         id: "DESC",
       },
+      skip: 0,
+      take: 20,
     });
+  }
+
+  async search(filters: any) {
+
+    let newFilters = filters;
+
+    if (filters.query) {
+      newFilters = {
+        ...filters, where: [
+          { firstName: Like(`%${filters.query}%`) },
+          { lastName: Like(`%${filters.query}%`) },
+          { designation: Like(`%${filters.query}%`) },
+          { email: Like(`%${filters.query}%`) },
+        ]
+      }
+      delete newFilters['query'];
+    }
+
+    if (filters.query && filters.status) {
+      newFilters = {
+        ...filters, where: [
+          { firstName: Like(`%${filters.query}%`), status: filters.status },
+          { lastName: Like(`%${filters.query}%`), status: filters.status },
+          { designation: Like(`%${filters.query}%`), status: filters.status },
+          { email: Like(`%${filters.query}%`), status: filters.status },
+        ]
+      }
+      delete newFilters['query'];
+      delete newFilters['status'];
+    }
+
+    const [records, total] = await this.leadsRepository.findAndCount(newFilters);
+    return { records, total }
+
   }
 
   findOne(id: number) {
