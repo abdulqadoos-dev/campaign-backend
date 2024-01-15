@@ -28,7 +28,7 @@ import { CampaignsModule } from './campaigns/campaigns.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [User, Campaign, Lead],
-      synchronize: process.env.SYNC === 'true',
+      synchronize: process.env.DB_SYNC === "true",
     }),
 
     AuthModule, UsersModule, CampaignsModule, LeadsModule,
