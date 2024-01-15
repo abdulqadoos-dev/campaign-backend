@@ -16,6 +16,8 @@ import { LeadsModule } from './leads/leads.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
 
 
+console.log(process.env.DB_SYNC === "true",)
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
