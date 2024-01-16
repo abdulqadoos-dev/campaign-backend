@@ -28,6 +28,9 @@ export class Lead {
   @Column({ nullable: true })
   notes: string;
 
+  @Column({ nullable: true })
+  address: string;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 

@@ -28,7 +28,10 @@ export class Company {
   notes: string;
 
   @Column({ nullable: true })
-  country: string;
+  address: string;
+
+  @Column({ nullable: true })
+  hiringFrom: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
