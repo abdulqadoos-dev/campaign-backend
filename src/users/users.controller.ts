@@ -10,6 +10,7 @@ export class UsersController {
   constructor(private userService: UsersService) { }
 
   @Post()
+  @Public()
   async create(@Body() user: User) {
     return this.userService.create(user);
   }
