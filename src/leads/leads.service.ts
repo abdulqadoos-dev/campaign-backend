@@ -18,13 +18,7 @@ export class LeadsService {
   }
 
   findAll() {
-    return this.leadsRepository.find({
-      order: {
-        id: "DESC",
-      },
-      skip: 0,
-      take: 20,
-    });
+    return this.leadsRepository.find({ order: { id: "DESC", }, skip: 0, take: 20, });
   }
 
   async search(filters: any) {

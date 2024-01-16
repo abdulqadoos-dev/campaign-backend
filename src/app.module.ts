@@ -14,6 +14,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { LeadsModule } from './leads/leads.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
+import { CompaniesModule } from './companies/companies.module';
+import { Company } from './companies/entities/company.entity';
 
 
 console.log(process.env.DB_SYNC === "true",)
@@ -29,11 +31,11 @@ console.log(process.env.DB_SYNC === "true",)
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Campaign, Lead],
+      entities: [User, Campaign, Lead, Company],
       synchronize: process.env.DB_SYNC === "true",
     }),
 
-    AuthModule, UsersModule, CampaignsModule, LeadsModule,
+    AuthModule, UsersModule, CampaignsModule, LeadsModule, CompaniesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
