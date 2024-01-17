@@ -30,7 +30,7 @@ export class CompaniesService {
       newFilters = {
         ...filters, where: [
           { name: Like(`%${filters.query}%`) },
-          { country: Like(`%${filters.query}%`) },
+          { address: Like(`%${filters.query}%`) },
           { type: Like(`%${filters.query}%`) },
           { email: Like(`%${filters.query}%`) },
           { notes: Like(`%${filters.query}%`) },
@@ -43,7 +43,7 @@ export class CompaniesService {
       newFilters = {
         ...filters, where: [
           { name: Like(`%${filters.query}%`), status: filters.status },
-          { country: Like(`%${filters.query}%`), status: filters.status },
+          { address: Like(`%${filters.query}%`), status: filters.status },
           { type: Like(`%${filters.query}%`), status: filters.status },
           { email: Like(`%${filters.query}%`), status: filters.status },
           { notes: Like(`%${filters.query}%`), status: filters.status },

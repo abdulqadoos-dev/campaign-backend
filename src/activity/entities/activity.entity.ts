@@ -1,7 +1,7 @@
 
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'activites' })
+@Entity({ name: 'activities' })
 export class Activity {
 
   @PrimaryGeneratedColumn()
@@ -11,7 +11,7 @@ export class Activity {
   name: string;
 
   @Column({ nullable: true })
-  note: string;
+  notes: string;
 
   @Column({ nullable: true })
   status: string;
