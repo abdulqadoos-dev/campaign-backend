@@ -39,6 +39,9 @@ export class StatusesService {
 
   }
 
+  findByType(type: any) {
+    return this.statusesRepository.find({ where: type })
+  }
 
   findOne(id: number) {
     return this.statusesRepository.findOneBy({ id })

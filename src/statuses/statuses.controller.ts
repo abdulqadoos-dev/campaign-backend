@@ -24,6 +24,13 @@ export class StatusesController {
   }
 
 
+
+  @Post('/type')
+  findByType(@Body() type: any) {
+    return this.statusesService.findByType(type);
+  }
+
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.statusesService.findOne(+id);
