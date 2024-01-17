@@ -18,7 +18,7 @@ export class LeadsService {
   }
 
   findAll() {
-    return this.leadsRepository.find({ order: { id: "DESC", }, skip: 0, take: 20, });
+    return this.leadsRepository.find({ order: { id: "DESC", }, skip: 0, take: 20, relations: { status: true } });
   }
 
   async search(filters: any) {
@@ -52,7 +52,11 @@ export class LeadsService {
       delete newFilters['status'];
     }
 
-    const [records, total] = await this.leadsRepository.findAndCount(newFilters);
+    const [records, total] = await this.leadsRepository.findAndCount({
+      ...newFilters, relations: {
+        status: true,
+      },
+    });
     return { records, total }
 
   }

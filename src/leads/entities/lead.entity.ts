@@ -1,4 +1,6 @@
+import { Stats } from "fs";
 import { Campaign } from "src/campaigns/entities/campaign.entity";
+import { Status } from "src/statuses/entities/status.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'leads' })
@@ -22,8 +24,8 @@ export class Lead {
   @Column({ nullable: true })
   url: string;
 
-  @Column({ default: "new" })
-  status: string;
+  // @Column({ default: "new" })
+  // status: string;
 
   @Column({ nullable: true })
   notes: string;
@@ -36,5 +38,8 @@ export class Lead {
 
   @ManyToOne(() => Campaign, (campaign) => campaign.leads)
   campaign: Campaign
+
+  @ManyToOne(() => Status, (status) => status.leads)
+  status: Status
 
 }

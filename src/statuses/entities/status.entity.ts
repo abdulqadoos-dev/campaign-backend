@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Lead } from "src/leads/entities/lead.entity";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
 @Entity({ name: 'statuses' })
 export class Status {
@@ -20,5 +21,8 @@ export class Status {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @OneToMany(() => Lead, (lead) => lead.status)
+  leads: Lead[]
 
 }
