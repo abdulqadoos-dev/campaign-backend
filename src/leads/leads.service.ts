@@ -38,7 +38,7 @@ export class LeadsService {
       delete newFilters['query'];
     }
 
-    if (filters.query && filters.status.value) {
+    if (filters.query && filters?.status?.value) {
       newFilters = {
         ...filters, where: [
           { firstName: Like(`%${filters.query}%`), status: {value : filters.status.value }},

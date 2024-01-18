@@ -38,22 +38,26 @@ export class CompaniesService {
       }
       delete newFilters['query'];
     }
-
-    if (filters.query && filters.status) {
+    if (filters.query && filters?.status?.value) {
       newFilters = {
         ...filters, where: [
-          { name: Like(`%${filters.query}%`), status: filters.status },
-          { address: Like(`%${filters.query}%`), status: filters.status },
-          { type: Like(`%${filters.query}%`), status: filters.status },
-          { email: Like(`%${filters.query}%`), status: filters.status },
-          { notes: Like(`%${filters.query}%`), status: filters.status },
+          { name: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
+          { address: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
+          { type: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
+          { email: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
+          { notes: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
         ]
       }
       delete newFilters['query'];
       delete newFilters['status'];
     }
 
-    const [records, total] = await this.companiesRepository.findAndCount(newFilters);
+
+    const [records, total] = await this.companiesRepository.findAndCount({
+      ...newFilters, relations: {
+        status: true,
+      },
+    });;
     return { records, total }
 
   }
