@@ -25,7 +25,6 @@ export class LeadsService {
 
     let newFilters = filters;
 
-    console.log(filters)
     if (filters.query) {
       newFilters = {
         ...filters, where: [
@@ -39,19 +38,19 @@ export class LeadsService {
       delete newFilters['query'];
     }
 
-    // if (filters.query && filters.status) {
-    //   newFilters = {
-    //     ...filters, where: [
-    //       { firstName: Like(`%${filters.query}%`), statusId: filters.status },
-    //       { lastName: Like(`%${filters.query}%`), statusId: filters.status },
-    //       { designation: Like(`%${filters.query}%`), statusId: filters.status },
-    //       { email: Like(`%${filters.query}%`), statusId: filters.status },
-    //       { notes: Like(`%${filters.query}%`), statusId: filters.status },
-    //     ]
-    //   }
-    //   delete newFilters['query'];
-    //   delete newFilters['status'];
-    // }
+    if (filters.query && filters.status.value) {
+      newFilters = {
+        ...filters, where: [
+          { firstName: Like(`%${filters.query}%`), status: {value : filters.status.value }},
+          { lastName: Like(`%${filters.query}%`), status: {value : filters.status.value } },
+          { designation: Like(`%${filters.query}%`), status: {value : filters.status.value } },
+          { email: Like(`%${filters.query}%`), status: {value : filters.status.value } },
+          { notes: Like(`%${filters.query}%`), status: {value : filters.status.value } },
+        ]
+      }
+      delete newFilters['query'];
+      delete newFilters['status'];
+    }
 
     const [records, total] = await this.leadsRepository.findAndCount({
       ...newFilters, relations: {
