@@ -1,3 +1,4 @@
+import { Company } from "src/companies/entities/company.entity";
 import { Lead } from "src/leads/entities/lead.entity";
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
@@ -10,7 +11,7 @@ export class Status {
   @Column()
   label: string;
 
-  @Column()
+  @Column() 
   value: string;
 
   @Column({ nullable: true })
@@ -24,5 +25,8 @@ export class Status {
 
   @OneToMany(() => Lead, (lead) => lead.status)
   leads: Lead[]
+
+  @OneToMany(() => Company, (company) => company.status)
+  companies: Company[]
 
 }

@@ -25,6 +25,7 @@ export class LeadsService {
 
     let newFilters = filters;
 
+    console.log(filters)
     if (filters.query) {
       newFilters = {
         ...filters, where: [
@@ -38,23 +39,24 @@ export class LeadsService {
       delete newFilters['query'];
     }
 
-    if (filters.query && filters.status) {
-      newFilters = {
-        ...filters, where: [
-          { firstName: Like(`%${filters.query}%`), status: filters.status },
-          { lastName: Like(`%${filters.query}%`), status: filters.status },
-          { designation: Like(`%${filters.query}%`), status: filters.status },
-          { email: Like(`%${filters.query}%`), status: filters.status },
-          { notes: Like(`%${filters.query}%`), status: filters.status },
-        ]
-      }
-      delete newFilters['query'];
-      delete newFilters['status'];
-    }
+    // if (filters.query && filters.status) {
+    //   newFilters = {
+    //     ...filters, where: [
+    //       { firstName: Like(`%${filters.query}%`), statusId: filters.status },
+    //       { lastName: Like(`%${filters.query}%`), statusId: filters.status },
+    //       { designation: Like(`%${filters.query}%`), statusId: filters.status },
+    //       { email: Like(`%${filters.query}%`), statusId: filters.status },
+    //       { notes: Like(`%${filters.query}%`), statusId: filters.status },
+    //     ]
+    //   }
+    //   delete newFilters['query'];
+    //   delete newFilters['status'];
+    // }
 
     const [records, total] = await this.leadsRepository.findAndCount({
       ...newFilters, relations: {
         status: true,
+        company: true,
       },
     });
     return { records, total }
