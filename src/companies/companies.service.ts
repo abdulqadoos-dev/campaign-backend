@@ -57,7 +57,7 @@ export class CompaniesService {
       ...newFilters, relations: {
         status: true,
       },
-    });;
+    });
     return { records, total }
 
   }
@@ -75,4 +75,5 @@ export class CompaniesService {
   remove(id: number) {
     return this.companiesRepository.delete(id);
   }
+  
 }

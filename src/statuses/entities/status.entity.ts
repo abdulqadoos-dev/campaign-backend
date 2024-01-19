@@ -1,3 +1,4 @@
+import { Activity } from "src/activity/entities/activity.entity";
 import { Company } from "src/companies/entities/company.entity";
 import { Lead } from "src/leads/entities/lead.entity";
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
@@ -28,5 +29,8 @@ export class Status {
 
   @OneToMany(() => Company, (company) => company.status)
   companies: Company[]
+
+  @OneToMany(() => Activity, (activity) => activity.status)
+  activities: Activity[]
 
 }

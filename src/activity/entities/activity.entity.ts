@@ -1,5 +1,6 @@
 
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Status } from "src/statuses/entities/status.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'activities' })
 export class Activity {
@@ -13,10 +14,10 @@ export class Activity {
   @Column({ nullable: true })
   notes: string;
 
-  @Column({ nullable: true })
-  status: string;
-
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @ManyToOne(() => Status, (status) => status.activities)
+  status: Status
 
 }

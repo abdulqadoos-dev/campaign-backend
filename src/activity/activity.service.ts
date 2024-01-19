@@ -21,7 +21,6 @@ export class ActivityService {
   }
 
 
-
   async search(filters: any) {
 
     let newFilters = filters;
@@ -35,17 +34,21 @@ export class ActivityService {
       delete newFilters['query'];
     }
 
-    if (filters.query && filters.status) {
+    if (filters.query &&  filters?.status?.value) {
       newFilters = {
         ...filters, where: [
-          { name: Like(`%${filters.query}%`), status: filters.status },
+          { name: Like(`%${filters.query}%`), status: {value : filters.status.value } },
         ]
       }
       delete newFilters['query'];
       delete newFilters['status'];
     }
 
-    const [records, total] = await this.activitiesRepository.findAndCount(newFilters);
+    const [records, total] = await this.activitiesRepository.findAndCount({
+      ...newFilters, relations: {
+        status: true,
+      },
+    });
     return { records, total }
 
   }
