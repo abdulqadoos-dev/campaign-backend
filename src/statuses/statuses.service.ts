@@ -26,7 +26,8 @@ export class StatusesService {
 
     if (filters.query) {
       newFilters = {
-        ...filters, where: [
+        ...filters,
+        where: [
           { label: Like(`%${filters.query}%`) },
           { type: Like(`%${filters.query}%`) },
         ]
@@ -34,7 +35,7 @@ export class StatusesService {
       delete newFilters['query'];
     }
 
-    const [records, total] = await this.statusesRepository.findAndCount(newFilters);
+    const [records, total] = await this.statusesRepository.findAndCount({...newFilters, order: { type: "DESC" }});
     return { records, total }
 
   }
