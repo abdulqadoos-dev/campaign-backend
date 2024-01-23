@@ -31,7 +31,7 @@ export class Status {
   @ManyToMany(() => Company, (company) => company.statuses)
   companies: Company[]
 
-  @OneToMany(() => Activity, (activity) => activity.status)
+  @ManyToMany(() => Activity, (activity) => activity.statuses)
   activities: Activity[]
 
 }

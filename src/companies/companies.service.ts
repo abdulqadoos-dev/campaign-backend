@@ -57,6 +57,7 @@ export class CompaniesService {
     const [records, total] = await this.companiesRepository.findAndCount({
       ...newFilters, relations: {
         statuses: true,
+        leads: true,
       },
     });
     return { records, total }

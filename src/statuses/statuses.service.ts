@@ -35,7 +35,17 @@ export class StatusesService {
       delete newFilters['query'];
     }
 
-    const [records, total] = await this.statusesRepository.findAndCount({...newFilters, order: { type: "DESC" }});
+
+    const [records, total] = await this.statusesRepository.findAndCount({
+      ...newFilters,
+      order: { type: "DESC" },
+      relations: {
+        leads: true,
+        companies: true,
+        activities: true,
+      }
+
+    });
     return { records, total }
 
   }

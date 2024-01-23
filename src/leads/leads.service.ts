@@ -33,6 +33,7 @@ export class LeadsService {
           { designation: Like(`%${filters.query}%`) },
           { email: Like(`%${filters.query}%`) },
           { notes: Like(`%${filters.query}%`) },
+          { company: { name: Like(`%${filters.query}%`) } },
         ]
       }
       delete newFilters['query'];
@@ -46,6 +47,7 @@ export class LeadsService {
           { designation: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
           { email: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
           { notes: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
+          { company: { name: Like(`%${filters.query}%`) }, statuses: { value: filters.statuses.value } },
         ]
       }
       delete newFilters['query'];

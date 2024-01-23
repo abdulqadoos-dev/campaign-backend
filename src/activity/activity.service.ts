@@ -34,19 +34,19 @@ export class ActivityService {
       delete newFilters['query'];
     }
 
-    if (filters.query &&  filters?.status?.value) {
+    if (filters.query && filters?.statuses?.value) {
       newFilters = {
         ...filters, where: [
-          { name: Like(`%${filters.query}%`), status: {value : filters.status.value } },
+          { name: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
         ]
       }
       delete newFilters['query'];
-      delete newFilters['status'];
+      delete newFilters['statuses'];
     }
 
     const [records, total] = await this.activitiesRepository.findAndCount({
       ...newFilters, relations: {
-        status: true,
+        statuses: true,
       },
     });
     return { records, total }
@@ -60,7 +60,7 @@ export class ActivityService {
   }
 
   async update(id: number, updateActivityDto: UpdateActivityDto) {
-    await this.activitiesRepository.update(id, updateActivityDto);
+    await this.activitiesRepository.save(updateActivityDto);
     return this.activitiesRepository.findOneBy({ id });
   }
 
