@@ -14,6 +14,7 @@ export class CompaniesService {
 
 
   create(createCompanyDto: CreateCompanyDto) {
+    console.log(createCompanyDto, "create")
     return this.companiesRepository.save(createCompanyDto);
   }
 
@@ -38,24 +39,24 @@ export class CompaniesService {
       }
       delete newFilters['query'];
     }
-    if (filters.query && filters?.status?.value) {
+    if (filters.query && filters?.statuses?.value) {
       newFilters = {
         ...filters, where: [
-          { name: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
-          { address: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
-          { type: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
-          { email: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
-          { notes: Like(`%${filters.query}%`),  status: {value : filters.status.value } },
+          { name: Like(`%${filters.query}%`),  statuses: {value : filters.statuses.value } },
+          { address: Like(`%${filters.query}%`),  statuses: {value : filters.statuses.value } },
+          { type: Like(`%${filters.query}%`),  statuses: {value : filters.statuses.value } },
+          { email: Like(`%${filters.query}%`),  statuses: {value : filters.statuses.value } },
+          { notes: Like(`%${filters.query}%`),  statuses: {value : filters.statuses.value } },
         ]
       }
       delete newFilters['query'];
-      delete newFilters['status'];
+      delete newFilters['statuses'];
     }
 
 
     const [records, total] = await this.companiesRepository.findAndCount({
       ...newFilters, relations: {
-        status: true,
+        statuses: true,
       },
     });
     return { records, total }
@@ -68,7 +69,7 @@ export class CompaniesService {
   }
 
   async update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    await this.companiesRepository.update(id, updateCompanyDto);
+    await this.companiesRepository.save(updateCompanyDto);
     return this.companiesRepository.findOneBy({ id });
   }
 

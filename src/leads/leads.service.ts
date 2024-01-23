@@ -18,7 +18,7 @@ export class LeadsService {
   }
 
   findAll() {
-    return this.leadsRepository.find({ order: { id: "DESC", }, skip: 0, take: 20, relations: { status: true } });
+    return this.leadsRepository.find({ order: { id: "DESC", }, skip: 0, take: 20, relations: { statuses: true } });
   }
 
   async search(filters: any) {
@@ -38,23 +38,23 @@ export class LeadsService {
       delete newFilters['query'];
     }
 
-    if (filters.query && filters?.status?.value) {
+    if (filters.query && filters?.statuses?.value) {
       newFilters = {
         ...filters, where: [
-          { firstName: Like(`%${filters.query}%`), status: {value : filters.status.value }},
-          { lastName: Like(`%${filters.query}%`), status: {value : filters.status.value } },
-          { designation: Like(`%${filters.query}%`), status: {value : filters.status.value } },
-          { email: Like(`%${filters.query}%`), status: {value : filters.status.value } },
-          { notes: Like(`%${filters.query}%`), status: {value : filters.status.value } },
+          { firstName: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
+          { lastName: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
+          { designation: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
+          { email: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
+          { notes: Like(`%${filters.query}%`), statuses: { value: filters.statuses.value } },
         ]
       }
       delete newFilters['query'];
-      delete newFilters['status'];
+      delete newFilters['statuses'];
     }
 
     const [records, total] = await this.leadsRepository.findAndCount({
       ...newFilters, relations: {
-        status: true,
+        statuses: true,
         company: true,
       },
     });
@@ -67,7 +67,7 @@ export class LeadsService {
   }
 
   async update(id: number, updateLeadDto: UpdateLeadDto) {
-    await this.leadsRepository.update(id, updateLeadDto);
+    await this.leadsRepository.save(updateLeadDto);
     return this.leadsRepository.findOneBy({ id });
   }
 

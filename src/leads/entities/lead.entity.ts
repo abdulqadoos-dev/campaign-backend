@@ -2,7 +2,7 @@ import { Stats } from "fs";
 import { Campaign } from "src/campaigns/entities/campaign.entity";
 import { Company } from "src/companies/entities/company.entity";
 import { Status } from "src/statuses/entities/status.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'leads' })
 export class Lead {
@@ -37,8 +37,9 @@ export class Lead {
   @ManyToOne(() => Campaign, (campaign) => campaign.leads)
   campaign: Campaign
 
-  @ManyToOne(() => Status, (status) => status.leads)
-  status: Status
+  @ManyToMany(() => Status, (status) => status.leads,{ cascade: true})
+  @JoinTable()
+  statuses: Status[]
 
   @ManyToOne(() => Company, (company) => company.leads)
   company: Company

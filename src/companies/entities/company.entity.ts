@@ -1,6 +1,6 @@
 import { Lead } from "src/leads/entities/lead.entity";
 import { Status } from "src/statuses/entities/status.entity";
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn, JoinTable } from "typeorm";
 
 @Entity({ name: 'companies' })
 export class Company {
@@ -35,8 +35,9 @@ export class Company {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ManyToOne(() => Status, (status) => status.companies)
-  status: Status
+  @ManyToMany(() => Status, (status) => status.companies,{ cascade: true})
+  @JoinTable()
+  statuses: Status[]
 
   @OneToMany(() => Lead, (lead) => lead.company)
   leads: Lead[]
