@@ -59,7 +59,7 @@ export class StatusesService {
   }
 
   async update(id: number, updateStatusDto: UpdateStatusDto) {
-    await this.statusesRepository.update(id, updateStatusDto);
+    await this.statusesRepository.save( updateStatusDto);
     return this.statusesRepository.findOneBy({ id });
   }
 
