@@ -29,16 +29,15 @@ export class StatusesService {
         ...filters,
         where: [
           { label: Like(`%${filters.query}%`) },
-          { type: Like(`%${filters.query}%`) },
+          { note: Like(`%${filters.query}%`) },
         ]
       }
       delete newFilters['query'];
     }
 
-
     const [records, total] = await this.statusesRepository.findAndCount({
       ...newFilters,
-      order: { type: "DESC" },
+      order: { id: "DESC" },
       relations: {
         leads: true,
         companies: true,
@@ -50,16 +49,12 @@ export class StatusesService {
 
   }
 
-  findByType(type: any) {
-    return this.statusesRepository.find({ where: type })
-  }
-
   findOne(id: number) {
     return this.statusesRepository.findOneBy({ id })
   }
 
   async update(id: number, updateStatusDto: UpdateStatusDto) {
-    await this.statusesRepository.save( updateStatusDto);
+    await this.statusesRepository.save(updateStatusDto);
     return this.statusesRepository.findOneBy({ id });
   }
 
