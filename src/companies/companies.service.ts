@@ -14,7 +14,7 @@ export class CompaniesService {
 
 
   create(createCompanyDto: CreateCompanyDto) {
-    console.log(createCompanyDto, "create")
+
     return this.companiesRepository.save(createCompanyDto);
   }
 

@@ -22,10 +22,13 @@ export class Lead {
   @Column({ nullable: true })
   email: string;
 
-  @Column({ nullable: true })
+  @Column({nullable: true, type: "text"})
+  imageUrl: string;
+
+  @Column({ nullable: true, })
   url: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: "text" })
   notes: string;
 
   @Column({ nullable: true })

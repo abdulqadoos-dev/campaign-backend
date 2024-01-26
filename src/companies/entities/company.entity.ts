@@ -23,8 +23,11 @@ export class Company {
   @Column({ nullable: true })
   url: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: "text" })
   notes: string;
+
+  @Column({ nullable: true, type: "text" })
+  imageUrl: string;
 
   @Column({ nullable: true })
   address: string;
@@ -35,7 +38,7 @@ export class Company {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ManyToMany(() => Status, (status) => status.companies,{ cascade: true})
+  @ManyToMany(() => Status, (status) => status.companies, { cascade: true })
   @JoinTable()
   statuses: Status[]
 
