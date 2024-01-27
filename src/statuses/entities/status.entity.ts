@@ -1,5 +1,8 @@
 import { Activity } from "src/activity/entities/activity.entity";
 import { Company } from "src/companies/entities/company.entity";
+import { Email } from "src/emails/entities/email.entity";
+
+
 import { Lead } from "src/leads/entities/lead.entity";
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
 
@@ -32,5 +35,8 @@ export class Status {
 
   @ManyToMany(() => Activity, (activity) => activity.statuses)
   activities: Activity[]
+
+  @ManyToMany(() => Email, (email) => email.statuses)
+  emails: Email[]
 
 }

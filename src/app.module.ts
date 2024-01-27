@@ -21,6 +21,8 @@ import { StatusesModule } from './statuses/statuses.module';
 import { Status } from './statuses/entities/status.entity';
 import { ActivityModule } from './activity/activity.module';
 import { Activity } from './activity/entities/activity.entity';
+import { EmailsModule } from './emails/emails.module';
+import { Email } from './emails/entities/email.entity';
 
 
 
@@ -37,11 +39,11 @@ console.log(process.env.DB_SYNC === "true",)
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Campaign, Lead, Company, Status, Activity],
+      entities: [User, Campaign, Lead, Company, Status, Activity, Email],
       synchronize: process.env.DB_SYNC === "true",
     }),
 
-    AuthModule, UsersModule, CampaignsModule, LeadsModule, CompaniesModule, StatusesModule, ActivityModule,
+    AuthModule, UsersModule, CampaignsModule, LeadsModule, CompaniesModule, StatusesModule, ActivityModule, EmailsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
