@@ -8,11 +8,12 @@ import { AuthGuard } from './auth.guard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { GoogleStrategy } from 'src/google.strategy';
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal: true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
@@ -20,7 +21,7 @@ import { ConfigModule } from '@nestjs/config';
       signOptions: { expiresIn: `${process.env.JWT_EXPIRED_IN}s` },
     }),
   ],
-  providers: [AuthService, 
+  providers: [AuthService, GoogleStrategy,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
@@ -29,4 +30,4 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [AuthController],
   exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule { }
