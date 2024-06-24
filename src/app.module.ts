@@ -25,20 +25,17 @@ import { EmailsModule } from './emails/emails.module';
 import { Email } from './emails/entities/email.entity';
 
 
-
-console.log(process.env.DB_SYNC === "true",)
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
 
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: 3306,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      host: process.env.MYSQL_HOST,
+      port: +process.env.MYSQL_PORT,
+      username: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
       entities: [User, Campaign, Lead, Company, Status, Activity, Email],
       synchronize: process.env.DB_SYNC === "true",
     }),
