@@ -29,12 +29,13 @@ export class AuthController {
   @Get('google')
   @UseGuards(AuthGuard('google'))
   googleLogin() {
-    console.log("here")
+    console.log("step::1  - googleLogin")
    }
 
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   googleLoginCallback(@Request() req, @Res() res: Response) {
+    console.log("step::2  - googleLoginCallback")
     const googleToken = req.user.accessToken;
     const googleRefreshToken = req.user.refreshToken;
 
