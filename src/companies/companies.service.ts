@@ -64,7 +64,6 @@ export class CompaniesService {
 
   }
 
-
   findOne(id: number) {
     return this.companiesRepository.findOneBy({ id });
   }

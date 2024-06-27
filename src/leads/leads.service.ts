@@ -16,7 +16,7 @@ export class LeadsService {
   create(createLeadDto: CreateLeadDto) {
     return this.leadsRepository.save(createLeadDto);
   }
-
+ 
   findAll() {
     return this.leadsRepository.find({ order: { id: "DESC", }, skip: 0, take: 20, relations: { statuses: true } });
   }

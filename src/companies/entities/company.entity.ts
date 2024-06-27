@@ -1,3 +1,4 @@
+import { Conversation } from "src/conversation/entities/conversation.entity";
 import { Lead } from "src/leads/entities/lead.entity";
 import { Status } from "src/statuses/entities/status.entity";
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn, JoinTable } from "typeorm";
@@ -44,5 +45,8 @@ export class Company {
 
   @OneToMany(() => Lead, (lead) => lead.company)
   leads: Lead[]
+
+  @OneToMany(() => Conversation, (conversation) => conversation.company)
+  conversation: Conversation[]
 
 }
