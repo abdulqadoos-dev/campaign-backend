@@ -76,5 +76,9 @@ export class EmailsService {
   }
 
 
+  send(email: any){
+    console.log(email)
+  }
+
 
 }

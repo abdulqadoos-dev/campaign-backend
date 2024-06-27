@@ -25,11 +25,23 @@ import { EmailsModule } from './emails/emails.module';
 import { Email } from './emails/entities/email.entity';
 import { ConversationModule } from './conversation/conversation.module';
 import { Conversation } from './conversation/entities/conversation.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.EMAIL_HOST,
+        port: +process.env.EMAIL_PORT,
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+      },
+    }),
 
     TypeOrmModule.forRoot({
       type: 'mysql',

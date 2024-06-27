@@ -32,9 +32,16 @@ export class EmailsController {
     return this.emailsService.update(+id, updateEmailDto);
   }
 
+  @Post('/send')
+  send(@Body() email: any){
+
+    console.log(email , "new object")
+
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.emailsService.remove(+id);
   }
-  
+
 }
