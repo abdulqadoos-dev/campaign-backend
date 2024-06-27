@@ -36,4 +36,5 @@ export class EmailsController {
   remove(@Param('id') id: string) {
     return this.emailsService.remove(+id);
   }
+  
 }

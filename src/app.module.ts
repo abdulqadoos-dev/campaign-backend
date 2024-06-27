@@ -23,6 +23,8 @@ import { ActivityModule } from './activity/activity.module';
 import { Activity } from './activity/entities/activity.entity';
 import { EmailsModule } from './emails/emails.module';
 import { Email } from './emails/entities/email.entity';
+import { ConversationModule } from './conversation/conversation.module';
+import { Conversation } from './conversation/entities/conversation.entity';
 
 
 @Module({
@@ -36,11 +38,11 @@ import { Email } from './emails/entities/email.entity';
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      entities: [User, Campaign, Lead, Company, Status, Activity, Email],
+      entities: [User, Campaign, Lead, Company, Status, Activity, Email, Conversation],
       synchronize: process.env.SYNC_DATABASE === "true",
     }),
 
-    AuthModule, UsersModule, CampaignsModule, LeadsModule, CompaniesModule, StatusesModule, ActivityModule, EmailsModule,
+    AuthModule, UsersModule, CampaignsModule, LeadsModule, CompaniesModule, StatusesModule, ActivityModule, EmailsModule, ConversationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
