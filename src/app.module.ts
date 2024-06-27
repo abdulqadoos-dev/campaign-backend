@@ -37,7 +37,7 @@ import { Email } from './emails/entities/email.entity';
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
       entities: [User, Campaign, Lead, Company, Status, Activity, Email],
-      synchronize: process.env.DB_SYNC === "true",
+      synchronize: process.env.SYNC_DATABASE === "true",
     }),
 
     AuthModule, UsersModule, CampaignsModule, LeadsModule, CompaniesModule, StatusesModule, ActivityModule, EmailsModule,
@@ -45,7 +45,6 @@ import { Email } from './emails/entities/email.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-
 
 export class AppModule {
   constructor(private dataSource: DataSource) { }
